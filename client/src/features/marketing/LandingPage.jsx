@@ -62,7 +62,7 @@ const journeySteps = [
     },
     {
         title: "Design Therapy Blueprint",
-    copy: "Publish ready-to-go Panchakarma treatments that map Snehan, Svedana, and Shodana combinations across the cleanse duration.",
+        copy: "Publish ready-to-go Panchakarma treatments that map Snehan, Svedana, and Shodana combinations across the cleanse duration.",
     },
     {
         title: "Auto-Schedule & Coordinate",

@@ -15,115 +15,115 @@ import FeedbackForm from "../features/patient/feedback/FeedbackForm.jsx";
 import PatientProfilePage from "../features/patient/profile/PatientProfilePage.jsx";
 
 const DashboardHomeRoute = () => {
-  const { user } = useAuth();
-  if (user?.role === "patient") {
-    return <PatientDashboardHome />;
-  }
+    const { user } = useAuth();
+    if (user?.role === "patient") {
+        return <PatientDashboardHome />;
+    }
 
-  return <DashboardHome />;
+    return <DashboardHome />;
 };
 
 const PractitionerOnlyRoute = ({ children }) => {
-  const { user } = useAuth();
-  if (user?.role === "practitioner" || user?.role === "admin") {
-    return children;
-  }
+    const { user } = useAuth();
+    if (user?.role === "practitioner" || user?.role === "admin") {
+        return children;
+    }
 
-  return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/dashboard" replace />;
 };
 
 const PatientOnlyRoute = ({ children }) => {
-  const { user } = useAuth();
-  if (user?.role === "patient") {
-    return children;
-  }
+    const { user } = useAuth();
+    if (user?.role === "patient") {
+        return children;
+    }
 
-  return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/dashboard" replace />;
 };
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth();
-  const location = useLocation();
+    const { isAuthenticated, isLoading } = useAuth();
+    const location = useLocation();
 
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-100">
-        <p className="animate-pulse text-sm uppercase tracking-[0.3em] text-slate-400">
-          Loading...
-        </p>
-      </div>
-    );
-  }
+    if (isLoading) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-100">
+                <p className="animate-pulse text-sm uppercase tracking-[0.3em] text-slate-400">
+                    Loading...
+                </p>
+            </div>
+        );
+    }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location }} />;
-  }
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace state={{ from: location }} />;
+    }
 
-  return <Outlet />;
+    return <Outlet />;
 };
 
 export const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+    return (
+        <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<DashboardHomeRoute />} />
-          <Route
-            path="schedule"
-            element={
-              <PractitionerOnlyRoute>
-                <DashboardSchedule />
-              </PractitionerOnlyRoute>
-            }
-          />
-          <Route
-            path="treatments"
-            element={
-              <PractitionerOnlyRoute>
-                <DashboardTreatments />
-              </PractitionerOnlyRoute>
-            }
-          />
-          <Route
-            path="patients"
-            element={
-              <PractitionerOnlyRoute>
-                <DashboardPatients />
-              </PractitionerOnlyRoute>
-            }
-          />
-          <Route
-            path="journey"
-            element={
-              <PatientOnlyRoute>
-                <PatientSchedulePage />
-              </PatientOnlyRoute>
-            }
-          />
-          <Route
-            path="feedback"
-            element={
-              <PatientOnlyRoute>
-                <FeedbackForm />
-              </PatientOnlyRoute>
-            }
-          />
-          <Route
-            path="profile"
-            element={
-              <PatientOnlyRoute>
-                <PatientProfilePage />
-              </PatientOnlyRoute>
-            }
-          />
-        </Route>
-      </Route>
+            <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<DashboardLayout />}>
+                    <Route index element={<DashboardHomeRoute />} />
+                    <Route
+                        path="schedule"
+                        element={
+                            <PractitionerOnlyRoute>
+                                <DashboardSchedule />
+                            </PractitionerOnlyRoute>
+                        }
+                    />
+                    <Route
+                        path="treatments"
+                        element={
+                            <PractitionerOnlyRoute>
+                                <DashboardTreatments />
+                            </PractitionerOnlyRoute>
+                        }
+                    />
+                    <Route
+                        path="patients"
+                        element={
+                            <PractitionerOnlyRoute>
+                                <DashboardPatients />
+                            </PractitionerOnlyRoute>
+                        }
+                    />
+                    <Route
+                        path="journey"
+                        element={
+                            <PatientOnlyRoute>
+                                <PatientSchedulePage />
+                            </PatientOnlyRoute>
+                        }
+                    />
+                    <Route
+                        path="feedback"
+                        element={
+                            <PatientOnlyRoute>
+                                <FeedbackForm />
+                            </PatientOnlyRoute>
+                        }
+                    />
+                    <Route
+                        path="profile"
+                        element={
+                            <PatientOnlyRoute>
+                                <PatientProfilePage />
+                            </PatientOnlyRoute>
+                        }
+                    />
+                </Route>
+            </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  );
+            <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+    );
 };

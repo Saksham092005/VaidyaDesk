@@ -12,8 +12,8 @@ const app = express();
 app.disable("x-powered-by");
 
 const corsOptions = {
-	origin: env.corsOrigins.length ? env.corsOrigins : true,
-	credentials: true,
+    origin: env.corsOrigins.length ? env.corsOrigins : true,
+    credentials: true,
 };
 
 app.use(helmet());
@@ -23,11 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan(env.isProduction ? "combined" : "dev"));
 
 app.get("/", (_req, res) => {
-	res.json({
-		name: "VaidyaDesk API",
-		version: "1.0",
-		docs: "/api/health",
-	});
+    res.json({
+        name: "VaidyaDesk API",
+        version: "1.0",
+        docs: "/api/health",
+    });
 });
 
 app.use("/api", apiRoutes);

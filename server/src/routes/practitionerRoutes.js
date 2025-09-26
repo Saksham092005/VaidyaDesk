@@ -9,15 +9,15 @@ const router = Router();
 router.use(authenticate);
 
 router.get(
-	"/me/dashboard",
-	allowRoles("practitioner", "admin"),
-	practitionerController.getOwnDashboard,
+    "/me/dashboard",
+    allowRoles("practitioner", "admin"),
+    practitionerController.getOwnDashboard,
 );
 
 router.get(
-	"/:practitionerId/dashboard",
-	allowRoles("practitioner", "admin"),
-	practitionerController.getDashboardByPractitionerId,
+    "/:practitionerId/dashboard",
+    allowRoles("practitioner", "admin"),
+    practitionerController.getDashboardByPractitionerId,
 );
 
 export default router;
