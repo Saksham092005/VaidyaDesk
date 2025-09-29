@@ -11,6 +11,7 @@ import {
     findTreatmentById,
     resolveTreatmentName as resolveTreatmentNameWithLookup,
 } from "../dashboard/utils/treatments.js";
+import HealthInsightsSection from "./components/HealthInsightsSection.jsx";
 
 const InfoRow = ({ label, value, helper }) => (
     <div className="space-y-1 rounded-2xl border border-white/10 bg-slate-900/60 p-4">
@@ -176,6 +177,8 @@ const PatientProfilePage = () => {
                     )}
                 </div>
             </section>
+
+            <HealthInsightsSection />
 
             <section className="grid gap-6 lg:grid-cols-2">
                 <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-slate-950/40">

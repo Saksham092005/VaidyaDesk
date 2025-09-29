@@ -20,7 +20,10 @@ const PatientSchedulePage = () => {
         refresh,
     } = usePatientDashboard();
 
-    const therapyCatalog = (treatments && treatments.length > 0) ? treatments : [];
+    const therapyCatalog = useMemo(
+        () => (Array.isArray(treatments) && treatments.length > 0 ? treatments : []),
+        [treatments],
+    );
 
     const treatmentLookup = useMemo(() => buildTreatmentLookup(therapyCatalog), [therapyCatalog]);
 
